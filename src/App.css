@@ -15,6 +15,7 @@ html {
 body {
     background-image: url(https://st.depositphotos.com/1011935/1277/v/600/depositphotos_12779936-stock-illustration-cocktail-pattern.jpg);
     font-family: 'Chicle', cursive;
+    line-height: 1.6;
 }
 
 span {
@@ -37,6 +38,11 @@ h1 {
 
 main {
     background-color: #ffecb4b0;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h2 {
@@ -44,9 +50,12 @@ h2 {
     text-align: center;
     font-size: 5rem;
     color: white;
-    text-shadow: 1px 2.5px 1px #f0aa33,
+    text-shadow: -1px -2px 1px #776139,
+                1px 2px 1px #776139,
+                1px 2.5px 1px #f0aa33,
                 2px 4px 0px #7cc2ad, 
                 3px 6px 0px #f67817;
+    margin-bottom: 30px;
 }
 
 form {
@@ -89,24 +98,101 @@ h3 {
     padding: 10px;
 }
 
-li {
-    width: 70%;
+.drinksContainer {
+    width: 60%;
+    height: 400px;
     display: flex;
     background-color: #ffecb4b0;
     border: 7px solid white;
     border-radius: 10px;
     margin: 20px 0;
+    overflow-y: scroll;
+    padding: 0 10px;
 }
 
-li h4 {
-    font-size: 3rem;
-    color: #f67817;
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 375px;
+    min-width: 375px;
+    padding: 20px;
 }
 
-li img {
-    width: 30%;
+
+img {
+    width: 100%;
     margin: 5px;
     border: 2px solid white;
     border-radius: 10px;
+}
+
+h4,
+h5,
+li,
+p {
+    margin: 10px;
+}
+
+h4 {
+    font-size: 3.5rem;
+    color: #f67817;
+}
+
+h5 {
+    font-family: 'Oranienbaum', serif;
+    font-size: 2.5rem;
+    /* color: #f0aa33; */
+}
+
+ul {
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li,
+p {
+    font-size: 2rem;
+    font-family: 'Oranienbaum', serif;
+    text-transform: initial;
+    list-style: none;
+}
+
+footer p {
+    background-color: #7cc2ad;
+    margin: 0;
+    padding: 10px;
+    font-family: 'Chicle', cursive;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+footer a:hover {
+    color: #f67817;
+}
+
+@media (max-width: 1000px) {
+    .drinksContainer {
+        width: 90%;
+    }
+}
+
+@media (max-width: 800px) {
+    .drinksContainer {
+        flex-direction: column;
+    }
+
+    .imageContainer {
+        margin: 0 auto;
+        width: 50%;
+        min-width: 100%;
+    }
 }
 

@@ -13,31 +13,31 @@ function App() {
   const [id, setId] = useState(0);
 
   // GETTING AND SETTING DRINK ID:
-  useEffect(
-    () => {
-      const url = new URL(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`);
-      const searchParams = new URLSearchParams({
-        // type is set onClick (cocktail or shot button)
-        c: type,
-        cache: false
-      }
-      );
-      url.search = searchParams;
-      fetch(url)
-        .then((response) => {
-          return response.json();
-        })
-        .then((drinks) => {
-          let idDrinkArray = [];
-          drinks.drinks.map(res => {
-            idDrinkArray.push(res.idDrink);
-          });
-          const i = idDrinkArray[Math.floor(Math.random() * idDrinkArray.length)];
-          setId(i);
-        })
-    },
-    [type]
-  );
+  // useEffect(
+  //   () => {
+  //     const url = new URL(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`);
+  //     const searchParams = new URLSearchParams({
+  //       // type is set onClick (cocktail or shot button)
+  //       c: type,
+  //       cache: false
+  //     }
+  //     );
+  //     url.search = searchParams;
+  //     fetch(url)
+  //       .then((response) => {
+  //         return response.json();
+  //       })
+  //       .then((drinks) => {
+  //         let idDrinkArray = [];
+  //         drinks.drinks.map(res => {
+  //           idDrinkArray.push(res.idDrink);
+  //         });
+  //         const i = idDrinkArray[Math.floor(Math.random() * idDrinkArray.length)];
+  //         setId(i);
+  //       })
+  //   },
+  //   [type]
+  // );
 
   // GETTING AND SETTING DRINKS BASED OFF OF ID
   useEffect(
@@ -63,13 +63,50 @@ function App() {
 
   const setCocktail = (event) => {
     event.preventDefault();
-    setType('cocktail')
-    console.log('cocktail')
+    const url = new URL(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`);
+    const searchParams = new URLSearchParams({
+      // type is set onClick (cocktail or shot button)
+      c: 'cocktail',
+      cache: false
+    }
+    );
+    url.search = searchParams;
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((drinks) => {
+        let idDrinkArray = [];
+        drinks.drinks.map(res => {
+          idDrinkArray.push(res.idDrink);
+        });
+        const i = idDrinkArray[Math.floor(Math.random() * idDrinkArray.length)];
+        setId(i);
+      })
   }
 
   const setShots = (event) => {
     event.preventDefault();
-    setType('shot')
+    const url = new URL(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`);
+    const searchParams = new URLSearchParams({
+      // type is set onClick (cocktail or shot button)
+      c: 'shot',
+      cache: false
+    }
+    );
+    url.search = searchParams;
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((drinks) => {
+        let idDrinkArray = [];
+        drinks.drinks.map(res => {
+          idDrinkArray.push(res.idDrink);
+        });
+        const i = idDrinkArray[Math.floor(Math.random() * idDrinkArray.length)];
+        setId(i);
+      })
   }
 
   console.log('rerender');
@@ -80,33 +117,49 @@ function App() {
         <h1><span>The </span>Cocktail Companion</h1>
       </header>
       <main>
-        <h2>Pick your poison</h2>
+        <h2>Pick Your Poison</h2>
         <div className="drinkType">
           <form>
             <button onClick={setCocktail}><i className="fas fa-cocktail"></i> Cocktails</button>
             <button onClick={setShots}><i className="fas fa-glass-whiskey"></i> Shots</button>
           </form>
         </div>
-        <div className="savedDrinks">
+        {/* <div className="savedDrinks">
           <h3>Your Saved Drinks:</h3>
-        </div>
-        <ul>
-          {
-            // rendering random drink
-            drink.drinks && drink.drinks.map(res => {
-              return (
-                <li>
+        </div> */}
+        {
+          // rendering random drink
+          drink.drinks && drink.drinks.map(res => {
+            return (
+              <container className="drinksContainer">
+                <div className="imageContainer">
                   <img src={res.strDrinkThumb} />
+                </div>
+                <div className="drinkInfomation">
                   <h4>{res.strDrink}</h4>
-                  <p>{res.strInstructions}</p>
-                  <p>{res.strIngredient1}</p>
-                  <button>save!</button>
-                </li>
-              )
-            })
-            }
-        </ul>
+                  <h5>Ingredients:</h5>
+                  <ul>
+                    <li>{res.strMeasure1} {res.strIngredient1}</li>
+                    <li>{res.strMeasure2} {res.strIngredient2}</li>
+                    <li>{res.strMeasure3} {res.strIngredient3}</li>
+                    <li>{res.strMeasure4} {res.strIngredient4}</li>
+                    <li>{res.strMeasure5} {res.strIngredient5}</li>
+                    <li>{res.strMeasure6} {res.strIngredient6}</li>
+                    <li>{res.strMeasure7} {res.strIngredient7}</li>
+                    <li>{res.strMeasure8} {res.strIngredient8}</li>
+                  </ul>
+                  <h5>Instructions:</h5>
+                  <p className="instructions">{res.strInstructions}</p>
+                  {/* <button>save!</button> */}
+                </div>
+              </container>
+            )
+          })
+        }
       </main>
+      <footer>
+        <p>Created at <a href="https://junocollege.com">Juno College</a></p>
+      </footer>
     </Fragment>
   );
 }
