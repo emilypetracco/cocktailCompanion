@@ -12,33 +12,6 @@ function App() {
   // id represents the drinkId
   const [id, setId] = useState(0);
 
-  // GETTING AND SETTING DRINK ID:
-  // useEffect(
-  //   () => {
-  //     const url = new URL(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`);
-  //     const searchParams = new URLSearchParams({
-  //       // type is set onClick (cocktail or shot button)
-  //       c: type,
-  //       cache: false
-  //     }
-  //     );
-  //     url.search = searchParams;
-  //     fetch(url)
-  //       .then((response) => {
-  //         return response.json();
-  //       })
-  //       .then((drinks) => {
-  //         let idDrinkArray = [];
-  //         drinks.drinks.map(res => {
-  //           idDrinkArray.push(res.idDrink);
-  //         });
-  //         const i = idDrinkArray[Math.floor(Math.random() * idDrinkArray.length)];
-  //         setId(i);
-  //       })
-  //   },
-  //   [type]
-  // );
-
   // GETTING AND SETTING DRINKS BASED OFF OF ID
   useEffect(
     () => {
@@ -124,9 +97,6 @@ function App() {
             <button onClick={setShots}><i className="fas fa-glass-whiskey"></i> Shots</button>
           </form>
         </div>
-        {/* <div className="savedDrinks">
-          <h3>Your Saved Drinks:</h3>
-        </div> */}
         {
           // rendering random drink
           drink.drinks && drink.drinks.map(res => {
@@ -150,7 +120,6 @@ function App() {
                   </ul>
                   <h5>Instructions:</h5>
                   <p className="instructions">{res.strInstructions}</p>
-                  {/* <button>save!</button> */}
                 </div>
               </container>
             )
